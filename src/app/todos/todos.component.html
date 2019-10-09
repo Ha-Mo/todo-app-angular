@@ -1,0 +1,6 @@
+<!--vorhandene Todos als Liste anzeigen--> 
+<form *ngFor = "let todo of todos; let i=index ">
+    <input  type="checkbox">
+         {{todo.title}}
+    <button (click) ="deleteTodo(i)">Löschen</button>
+</form>

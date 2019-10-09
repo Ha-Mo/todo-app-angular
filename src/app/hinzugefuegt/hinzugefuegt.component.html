@@ -1,0 +1,13 @@
+<!--Laden der Todoliste-->
+<div>   
+    <form *ngFor = "let todo of todos; let i = index ">
+        <input type="checkbox">
+            {{todo.title}}
+        <button (click)="deleteTodo(i)">Löschen</button>
+    </form>
+</div>
+<!--Hinzufügen von Todos-->
+<div>
+    <input type="text" (keyup.enter)="createTodo($event)"  [(ngModel)]="Todo$.title">
+    <button (click)="createTodo($event)">Hinzufügen</button>
+</div>

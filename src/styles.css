@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    background-color: gainsboro;
+    font-family: 'Courier New', Courier, monospace;
+}
+h1{
+    color: black;
+    font-size: 50px;
+}
+form{
+    font-size: 100%;
+    background-color: whitesmoke;
+    width: 100%;
+    float: left;
+}
+button{
+    font-size: 80%;
+    width: 25%;
+    background-color: whitesmoke;
+    float: right;
+}
+/* colum */
+.colum{
+    float: left;
+}
+.colum.side{
+    width: 15%;
+}
+.colum.middle{
+    width: 70%;
+}
