@@ -1,6 +1,10 @@
-<!--vorhandene Todos als Liste anzeigen--> 
-<form *ngFor = "let todo of todos; let i=index ">
-    <input  type="checkbox">
-         {{todo.title}}
-    <button (click) ="deleteTodo(i)">Löschen</button>
+<!--vorhandene Todos als Liste anzeigen-->
+<form *ngFor = "let todo of todos; let i=index" cdk>
+    <mat-checkbox class="example-margin" color='primary'>
+            <span *ngIf = "todo!==editTodo">{{todo.title}}</span>
+            <input *ngIf = "todo === editTodo" [(ngModel)]="todo.title" name="todo" type="text" (keyup.enter)="workOnTodo()">
+    </mat-checkbox> 
+    <button mat-stroked-button color="warn" (mousedown)="delete(todo)">Löschen</button>
+    <button mat-stroked-button color="primary" (click)= "edit(todo)">Bearbeiten</button>
 </form>
+

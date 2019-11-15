@@ -1,8 +1,8 @@
 export class Todo {
-    constructor (
+    constructor(
         public UserId: number,
         public id: number,
         public title: string,
-        public completed: boolean,   
+        public completed: boolean,
     ) {}
 }

@@ -1,50 +1,53 @@
 import { Component, OnInit } from '@angular/core';
+import {TodoService} from '../todo.service';
 import { Todo } from 'src/app/todo';
 
 @Component({
   selector: 'app-hinzugefuegt',
   templateUrl: './hinzugefuegt.component.html',
+  providers: [TodoService],
   styleUrls: ['./hinzugefuegt.component.css']
 })
 export class HinzugefuegtComponent implements OnInit {
+  public Todo$: Todo;
+  // Array speichert die Todos
+  todos: Todo[] = [];
+  editTodo: Todo; // bearbeitets Todo
 
   ngOnInit() { }
 
-  public Todo$: Todo;
-
-  private id = 0;
-
-  constructor() {
-    this.Todo$ = {
-      UserId: undefined,
-      id: 0,
-      title: undefined,
-      completed: false
-    };
-    console.log(this.Todo$);
-  }
-  
-  //todo erzeugen
-  public createTodo(event?: any): Todo {
-    console.log(this.Todo$);
-    const newTodo = this.Todo$;
-    this.Todo$ = {
-      UserId: undefined,
-      id: ++this.id,
-      title: undefined,
-      completed: false
-    };
-    if (newTodo) {
-      this.todos.push(newTodo);
+  constructor(private todoService: TodoService) {}
+  // todo erzeugen
+  public createTodo(title: string): void {
+    this.editTodo = undefined;
+    title = title.trim();
+    if (!title) {
+      return;
     }
-    return newTodo;
-  };
-  // Array speichert die Todos
-  todos = [];
-
-  //todo löschen
-  deleteTodo(i) {
-    console.log("Löschen");
-    this.todos.splice(i, 1);
-  };
+    const newTodo: Todo = {title} as Todo;
+    this.todoService.addTodo(newTodo).subscribe(todo => this.todos.push(todo));
+  }
+  // todos löschen
+  delete(todo: Todo) {
+    this.todos = this.todos.filter(t => t !== todo);
+    this.todoService
+    .deleteTodo(todo.id)
+    .subscribe();
+  }
+  // todos bearbeiten
+  workOnTodo() {
+    if (this.editTodo) {
+      this.todoService.updateTodo(this.editTodo)
+      .subscribe ( todo => {
+        const index = todo ? this.todos.findIndex(t => t.id === todo.id) : -1;
+        if (index > 1) {
+          this.todos[index] = todo;
+        }
+      });
+      this.editTodo = undefined;
+    }
+  }
+  edit( todo: Todo) {
+    this.editTodo = todo;
+  }
 }

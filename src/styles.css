@@ -15,7 +15,7 @@ form{
 }
 button{
     font-size: 80%;
-    width: 25%;
+    width: 15%;
     background-color: whitesmoke;
     float: right;
 }
@@ -29,3 +29,5 @@ button{
 .colum.middle{
     width: 70%;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
