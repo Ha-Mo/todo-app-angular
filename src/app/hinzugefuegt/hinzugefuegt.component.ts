@@ -5,7 +5,7 @@ import { Todo } from 'src/app/todo';
 @Component({
   selector: 'app-hinzugefuegt',
   templateUrl: './hinzugefuegt.component.html',
-  providers: [TodoService],
+  providers: [],
   styleUrls: ['./hinzugefuegt.component.css']
 })
 export class HinzugefuegtComponent implements OnInit {
@@ -14,18 +14,22 @@ export class HinzugefuegtComponent implements OnInit {
   todos: Todo[] = [];
   editTodo: Todo; // bearbeitets Todo
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   constructor(private todoService: TodoService) {}
   // todo erzeugen
-  public createTodo(title: string): void {
+  createTodo(title: string): void {
     this.editTodo = undefined;
     title = title.trim();
     if (!title) {
       return;
     }
     const newTodo: Todo = {title} as Todo;
-    this.todoService.addTodo(newTodo).subscribe(todo => this.todos.push(todo));
+    this.todoService.addTodo(newTodo).subscribe(todo => {
+      this.todos.push(todo);
+      this.todos.sort(this.sortieren);
+    });
   }
   // todos löschen
   delete(todo: Todo) {
@@ -49,5 +53,21 @@ export class HinzugefuegtComponent implements OnInit {
   }
   edit( todo: Todo) {
     this.editTodo = todo;
+  }
+  abbrechen() {
+    console.log('abbrechen');
+  }
+  // alphabetisch sortieren
+  sortieren(a, b) {
+    const titleA = a.title.toLowerCase();
+    const titleB = b.title.toLowerCase();
+
+    let comparison = 0;
+    if (titleA > titleB) {
+      comparison = 1;
+    } else if (titleA < titleB) {
+      comparison = -1;
+    }
+    return comparison;
   }
 }

@@ -12,7 +12,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule, MatIcon } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { TodosComponent } from './todos/todos.component';
@@ -42,7 +43,14 @@ import { TodoListeComponent } from './todo-liste/todo-liste.component';
     MatInputModule,
     MatButtonModule,
     ScrollingModule,
-    DragDropModule,
+    MatListModule,
+    MatIconModule,
+  ],
+  exports: [
+    AppComponent,
+    TodosComponent,
+    HinzugefuegtComponent,
+    TodoListeComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
