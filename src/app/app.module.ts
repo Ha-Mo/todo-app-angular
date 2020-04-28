@@ -19,6 +19,8 @@ import { AppComponent } from './app.component';
 import { TodosComponent } from './todos/todos.component';
 import { HinzugefuegtComponent } from './hinzugefuegt/hinzugefuegt.component';
 import { TodoListeComponent } from './todo-liste/todo-liste.component';
+import { TodoComponent } from './todo/todo.component';
+import { TodoService } from './todo.service';
 
 
 
@@ -28,6 +30,7 @@ import { TodoListeComponent } from './todo-liste/todo-liste.component';
     TodosComponent,
     HinzugefuegtComponent,
     TodoListeComponent,
+    TodoComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,7 @@ import { TodoListeComponent } from './todo-liste/todo-liste.component';
     HinzugefuegtComponent,
     TodoListeComponent,
   ],
-  providers: [],
+  providers: [TodoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,10 +1,21 @@
-<div class="colum side"><br></div>
-<div class="colum middle">
+<div class = 'colum side'><br></div>
+<div class = 'colum middle'>
   <h1>
     Todos:
   </h1>
   <div>
-      <app-hinzugefuegt></app-hinzugefuegt>
-      <app-todos></app-todos>
+      <app-hinzugefuegt (add)='onAddTodo($event)'></app-hinzugefuegt>
+      <button mat-stroked-button color = 'primary'  (click)="filter = 'all'; todosFiltered()">Alle</button>
+      <button mat-stroked-button color = 'primary' (click)="filter = 'open'; todosFiltered()">offen</button>
+      <button mat-stroked-button color = 'primary' (click)="filter = 'completed'; todosFiltered()">erledigt</button>
+      <app-todos 
+        [todos]='todos' [filter]='filter' 
+        [todoOpen]='todoOpen' 
+        [todoCompleted]='todoCompleted' 
+        (toggleCompleted)='onToggleTodoComplete($event)' 
+        (remove)='onRemoveTodo($event)'
+        (changeTitle)='onChangeTitle($event)'
+        (abbrechen)='onAbbrechen($event)'>
+      </app-todos>
   </div>
 </div>  

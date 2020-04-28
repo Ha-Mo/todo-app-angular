@@ -2,46 +2,41 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from '../todo';
 
 @Component({
-  selector: 'app-todos',
-  templateUrl: './todos.component.html',
-  providers: [],
-  styleUrls: ['./todos.component.css']
+  selector: 'app-todo',
+  templateUrl: './todo.component.html',
+  styleUrls: ['./todo.component.css']
 })
-export class TodosComponent implements OnInit {
-
-  @Input() todos: Todo[];
-  @Input() todoOpen: Todo[];
-  @Input() todoCompleted: Todo[];
-  @Input() filter: string;
+export class TodoComponent implements OnInit {
+  @Input() todo: Todo;
 
   @Output() remove: EventEmitter<Todo> = new EventEmitter();
   @Output() toggleComplete: EventEmitter<Todo> = new EventEmitter();
   @Output() changeTitle: EventEmitter<Todo> = new EventEmitter();
   @Output() abbrechen: EventEmitter<Todo> = new EventEmitter();
 
+  aenderungen: boolean; // Todos bearbeiten Button
+
   ngOnInit() {}
   constructor() {}
 
-  trackById(todo: any): string {
-    return todo.id;
-  }
-  onToggleTodoComplete(todo: Todo) {
-    this.toggleComplete.emit(todo);
-    console.log('completed');
+  onAbbrechen(todo: Todo) {
+    this.abbrechen.emit(todo);
+    this.aenderungen = !this.aenderungen;
+    console.log('abbrechen');
   }
 
-  onRemoveTodo(todo: Todo) {
+  onToggleTodoComplete(todo: Todo) {
+    this.toggleComplete.emit(todo);
+    console.log('completedTodo');
+  }
+
+  removeTodo( todo: Todo) {
     this.remove.emit(todo);
-    console.log('löschen');
   }
 
   onChangeTitle(todo: Todo) {
     this.changeTitle.emit(todo);
-    console.log('change');
-  }
-
-  onAbbrechen(todo: Todo) {
-    this.abbrechen.emit(todo);
-    console.log('abbrechen 2');
+    this.aenderungen = !this.aenderungen;
+    console.log(this.todo + 'changeTitle');
   }
 }

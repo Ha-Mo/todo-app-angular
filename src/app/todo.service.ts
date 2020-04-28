@@ -5,21 +5,27 @@ import { Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class TodoService {
-  public todos: Todo[]; // Todo Liste
-  todosUrl = 'https://jsonplaceholder.typicode.com/todos/';  // URL to web api
+  public todos: Todo[] = []; // Todo Liste
+  todosUrl = 'https://jsonplaceholder.typicode.com/todos';  // URL to web api
+  lastId = 0;
+
   constructor(private http: HttpClient) {}
+
   getTodo(): Observable<Todo[]> {
     return this.http.get<Todo[]>(this.todosUrl);
   }
-  addTodo(todos: Todo): Observable<Todo> {
-    return this.http.post<Todo>(this.todosUrl, todos);
+
+  addTodo(todo: Todo): Observable<Todo> {
+    return this.http.post<Todo>(this.todosUrl, todo);
   }
-  deleteTodo(id: number): Observable<{}> {
+
+  deleteTodo(id: number): Observable<Todo> {
     const url = `${this.todosUrl}/${id}`;
-    return this.http.delete(url);
+    return this.http.delete<Todo>(url);
   }
-  updateTodo(todos: Todo): Observable<Todo> {
-    const url = 'https://jsonplaceholder.typicode.com/todos/1';
-    return this.http.put<Todo>(url, todos);
+
+  updateTodo(todo: Todo, id: number): Observable<Todo> {
+    const url = `${this.todosUrl}/${id}`;
+    return this.http.put<Todo>(url, todo);
   }
 }

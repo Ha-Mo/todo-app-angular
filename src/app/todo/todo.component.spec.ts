@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {HinzugefuegtComponent} from './hinzugefuegt.component';
+import { TodoComponent } from './todo.component';
 
-describe('HinzugefuegtComponent', () => {
-  let component: HinzugefuegtComponent;
-  let fixture: ComponentFixture<HinzugefuegtComponent>;
+describe('TodoComponent', () => {
+  let component: TodoComponent;
+  let fixture: ComponentFixture<TodoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HinzugefuegtComponent ]
+      declarations: [ TodoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HinzugefuegtComponent);
+    fixture = TestBed.createComponent(TodoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,16 @@
+<mat-checkbox class = 'example-margin' color = 'primary' name = 'todo' [checked]='todo.completed' (change)='onToggleTodoComplete(todo)'>
+    <span *ngIf = '!aenderungen'>{{todo.title}}</span>
+    <input matInput placeholder = 'todo.title' *ngIf = 'aenderungen' [(ngModel)] = 'todo.title' name = 'todo' type = 'text' (keyup.enter)='onChangeTitle(todo)'>
+</mat-checkbox> 
+<button mat-icon-button color = 'warn' *ngIf = '!aenderungen' (click)='removeTodo(todo)' aria-label = 'löschen'>
+    <mat-icon>delete</mat-icon>
+</button>
+<button mat-icon-button color = 'primary' *ngIf = '!aenderungen' (click) = 'aenderungen = !aenderungen'>
+    <mat-icon>create</mat-icon>
+</button>
+<button mat-icon-button color = 'primary' *ngIf = 'aenderungen' (click)='onAbbrechen(todo)'>
+    <mat-icon>clear</mat-icon>
+</button>
+<button mat-icon-button color = 'primary' *ngIf = 'aenderungen' (click)='onChangeTitle(todo)'>
+    <mat-icon>done</mat-icon>
+</button>
