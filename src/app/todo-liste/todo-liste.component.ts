@@ -10,16 +10,15 @@ import { TodoService } from '../todo.service';
 })
 export class TodoListeComponent implements OnInit {
   todos: Todo[]; // Todo liste
-  filter = 'all'; // Filtern nach Status der Todos
+  filter = 'Alle'; // Filtern nach Status der Todos
   todoOpen: Todo[];
   todoCompleted: Todo[];
-  filteredTodos = this.todos;
+  filteredTodos: Todo[];
 
-  constructor(private todoService: TodoService) {}
+  constructor(private todoService: TodoService) { }
 
   ngOnInit() {
     this.loadTodos();
-    this.todosFiltered();
   }
 
   // Todos anzeigen
@@ -29,30 +28,9 @@ export class TodoListeComponent implements OnInit {
         this.todos = data;
         // sortiert alphabetisch
         this.todos.sort(this.sortieren);
-        console.log(this.todos);
       });
   }
 
-  // filtern nach Status der Todos
- todosFiltered(): Todo[] {
-    console.log(this.filter);
-    if ( this.filter === 'all') {
-      this.filteredTodos = this.todos;
-      console.log(this.filteredTodos);
-      return this.filteredTodos;
-    } else if ( this.filter === 'open') {
-      this.todoOpen = this.todos.filter(todo => !todo.completed);
-      this.filteredTodos = this.todoOpen;
-      console.log(this.filteredTodos);
-      return this.filteredTodos;
-    } else if ( this.filter === 'completed') {
-      this.todoCompleted = this.todos.filter(todo => todo.completed);
-      this.filteredTodos = this.todoCompleted;
-      console.log(this.filteredTodos);
-      return this.filteredTodos;
-    }
-    return this.filteredTodos;
-  }
   // Todos alpabteisch sortieren
   sortieren(a, b) {
     const titleA = a.title.toLowerCase();
@@ -68,38 +46,45 @@ export class TodoListeComponent implements OnInit {
   }
 
   // Todos hinzufügen
- onAddTodo(todo: Todo) {
+  onAddTodo(todo: Todo) {
     this.todoService.addTodo(todo).subscribe(
-      (data: Todo) => {this.todos.push(data);
+      (data: Todo) => {
+        this.todos.push(data);
+        console.log(data);
       });
-    console.log('hinzufügen' + todo);
+    // alphabetisches Sortieren der Hinzugefügten Elemente
+    this.todos.sort(this.sortieren);
     console.log(this.todos);
   }
+
   // Todos bearbeiten
   onToggleTodoComplete(todo: Todo) {
     this.todoService
       .updateTodo(todo, todo.id)
       .subscribe(
-        (updatedTodo) => {todo = updatedTodo;
+        (updatedTodo) => {
+          todo = updatedTodo;
         }
       );
     console.log('onCompletd' + todo);
   }
+
   // Todos löschen
   onRemoveTodo(todo: Todo) {
     this.todos = this.todos.filter(t => t !== todo);
-    this.todoCompleted = this.todos.filter(t => t !== todo);
-    this.todoOpen = this.todos.filter(t => t !== todo);
     this.todoService
       .deleteTodo(todo.id)
       .subscribe();
+    console.log(this.todos);
   }
+
   // Titel ändern
   onChangeTitle(todo: Todo) {
     this.todoService
       .updateTodo(todo, todo.id)
       .subscribe(
-        (updatedTodo) => {todo = updatedTodo;
+        (updatedTodo) => {
+          todo = updatedTodo;
         }
       );
     console.log('change' + todo);

@@ -15,25 +15,31 @@ export class HinzugefuegtComponent implements OnInit {
   todo: Todo;
 
   ngOnInit() {
+    this.newTodo();
   }
 
-  constructor() {
+  constructor() {}
+
+  // Todo erstellen
+  newTodo(): Todo {
     this.todo = {
       UserId: undefined,
       id: undefined,
       title: undefined,
       completed: false,
     };
+    return this.todo;
   }
   // Todo hinzufügen
   addTodo(event?: any) {
-    this.add.emit(this.todo);
-    console.log(this.todo);
-    this.todo = {
-      UserId: undefined,
-      id: undefined,
-      title: undefined,
-      completed: false,
-    };
+    // Todo ohne Titel kann nicht hinzugefügt werden
+    if (this.todo.title === undefined || this.todo.title === '') {
+      console.log('undefined');
+    } else {
+      this.todo.title = this.todo.title.trim();
+      this.add.emit(this.todo);
+      console.log(this.todo);
+      this.newTodo();
+    }
   }
 }

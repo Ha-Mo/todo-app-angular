@@ -1,7 +1,7 @@
 <!--Hinzufügen von Todos-->
 <div>
-    <mat-form-field appearance = 'outline'>
-        <input matInput placeholder = 'Todo' type = 'text' (keyup.enter)='addTodo($event)' [(ngModel)] = 'todo.title'>
+    <mat-form-field appearance='outline'>
+        <input matInput placeholder='Todo' type='text' (keyup.enter)='addTodo($event)' [(ngModel)]='todo.title'>
     </mat-form-field>
-    <button mat-stroked-button color = 'primary' (click)='addTodo($event)' >Hinzugefügt</button>
+    <button mat-stroked-button color='primary' (click)='addTodo($event)'>Hinzufügen</button>
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from '../todo';
 
+
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -16,8 +17,8 @@ export class TodoComponent implements OnInit {
 
   aenderungen: boolean; // Todos bearbeiten Button
 
-  ngOnInit() {}
-  constructor() {}
+  ngOnInit() { }
+  constructor() { }
 
   onAbbrechen(todo: Todo) {
     this.abbrechen.emit(todo);
@@ -26,17 +27,18 @@ export class TodoComponent implements OnInit {
   }
 
   onToggleTodoComplete(todo: Todo) {
+    todo.completed = !todo.completed;
     this.toggleComplete.emit(todo);
-    console.log('completedTodo');
+    console.log('completed Todo');
   }
 
-  removeTodo( todo: Todo) {
+  removeTodo(todo: Todo) {
     this.remove.emit(todo);
   }
 
-  onChangeTitle(todo: Todo) {
-    this.changeTitle.emit(todo);
+  onChangeTitle(title: string) {
+    console.log(title);
     this.aenderungen = !this.aenderungen;
-    console.log(this.todo + 'changeTitle');
+    this.changeTitle.emit(this.todo);
   }
 }

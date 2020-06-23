@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientXsrfModule } from '@angular/common/http';
-import { MatSliderModule } from '@angular/material/slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -13,7 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatListModule } from '@angular/material/list';
-import { MatIconModule, MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
 
 import { AppComponent } from './app.component';
 import { TodosComponent } from './todos/todos.component';
@@ -21,6 +20,7 @@ import { HinzugefuegtComponent } from './hinzugefuegt/hinzugefuegt.component';
 import { TodoListeComponent } from './todo-liste/todo-liste.component';
 import { TodoComponent } from './todo/todo.component';
 import { TodoService } from './todo.service';
+import { FilterPipe } from './filter.pipe';
 
 
 
@@ -31,6 +31,7 @@ import { TodoService } from './todo.service';
     HinzugefuegtComponent,
     TodoListeComponent,
     TodoComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -38,9 +39,7 @@ import { TodoService } from './todo.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientXsrfModule,
     BrowserAnimationsModule,
-    MatSliderModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
@@ -48,6 +47,7 @@ import { TodoService } from './todo.service';
     ScrollingModule,
     MatListModule,
     MatIconModule,
+    MatSelectModule,
   ],
   exports: [
     AppComponent,

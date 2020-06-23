@@ -11,7 +11,6 @@ export class TodosComponent implements OnInit {
 
   @Input() todos: Todo[];
   @Input() todoOpen: Todo[];
-  @Input() todoCompleted: Todo[];
   @Input() filter: string;
 
   @Output() remove: EventEmitter<Todo> = new EventEmitter();

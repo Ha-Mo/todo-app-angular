@@ -3,42 +3,36 @@
 <br>
 <br>
 <br>
-<span *ngIf = 'filter === "all" ' >
-<cdk-virtual-scroll-viewport itemSize = '50' class = 'example-viewport' >
-<mat-list *cdkVirtualFor = 'let todo of todos; let i = index; trackBy: trackById'>
-    <app-todo 
-        [todo]='todo'  
-        (remove)='onRemoveTodo($event)' 
-        (toggleComplete)='onToggleTodoComplete($event)'
-        (changeTitle)='onChangeTitle($event)'
-        (abbrechen)='onAbbrechen($event)'>
-    </app-todo>
-</mat-list>
-</cdk-virtual-scroll-viewport>
+<span *ngIf='filter === "Alle" '>
+    <cdk-virtual-scroll-viewport itemSize='50' class='viewport' minBufferPx="750" maxBufferPx="1500">
+        <mat-list *cdkVirtualFor='let todo of todos; let i = index; trackBy: trackById'>
+            <mat-list-item>
+                <app-todo [todo]='todo' (remove)='onRemoveTodo($event)' (toggleComplete)='onToggleTodoComplete($event)'
+                    (changeTitle)='onChangeTitle($event)' (abbrechen)='onAbbrechen($event)'>
+                </app-todo>
+            </mat-list-item>
+        </mat-list>
+    </cdk-virtual-scroll-viewport>
 </span>
-<span *ngIf = 'filter === "completed" '>
-<cdk-virtual-scroll-viewport itemSize = '50' class = 'example-viewport' >
-    <mat-list *cdkVirtualFor = 'let todo of todoCompleted; let i = index; trackBy: trackById'>
-        <app-todo 
-        [todo]='todo'
-        (remove)='onRemoveTodo($event)'
-        (toggleComplete)='onToggleTodoComplete($event)'
-        (changeTitle)='onChangeTitle($event)'
-        (abbrechen)='onAbbrechen($event)'>
-    </app-todo>
-    </mat-list>
-</cdk-virtual-scroll-viewport>
+<span *ngIf='filter === "Erledigt" '>
+    <cdk-virtual-scroll-viewport itemSize='50' class='viewport' minBufferPx="750" maxBufferPx="1500">
+        <mat-list *cdkVirtualFor='let todo of (todos|todosFilter : filter ); let i = index; trackBy: trackById'>
+            <mat-list-item>
+                <app-todo [todo]='todo' (remove)='onRemoveTodo($event)' (toggleComplete)='onToggleTodoComplete($event)'
+                    (changeTitle)='onChangeTitle($event)' (abbrechen)='onAbbrechen($event)'>
+             </app-todo>
+            </mat-list-item>
+        </mat-list>
+    </cdk-virtual-scroll-viewport>
 </span>
-<span *ngIf = 'filter === "open" '>
-<cdk-virtual-scroll-viewport itemSize = '50' class = 'example-viewport' >
-    <mat-list *cdkVirtualFor = 'let todo of todoOpen; let i = index; trackBy: trackById'>
-        <app-todo 
-        [todo]='todo'
-        (remove)='onRemoveTodo($event)'
-        (toggleComplete)='onToggleTodoComplete($event)
-        '(changeTitle)='onChangeTitle($event)'
-        (abbrechen)='onAbbrechen($event)'>
-    </app-todo>
-    </mat-list>
-</cdk-virtual-scroll-viewport>
+<span *ngIf='filter === "Offen" '>
+    <cdk-virtual-scroll-viewport itemSize='50' class='viewport' minBufferPx="750" maxBufferPx="1500">
+        <mat-list *cdkVirtualFor='let todo of (todos|todosFilter : filter ); let i = index; trackBy: trackById'>
+            <mat-list-item>
+                <app-todo [todo]='todo' (remove)='onRemoveTodo($event)' (toggleComplete)='onToggleTodoComplete($event)' 
+                    (changeTitle)='onChangeTitle($event)' (abbrechen)='onAbbrechen($event)'>
+             </app-todo>
+            </mat-list-item>
+        </mat-list>
+    </cdk-virtual-scroll-viewport>
 </span>

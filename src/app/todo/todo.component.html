@@ -1,16 +1,21 @@
-<mat-checkbox class = 'example-margin' color = 'primary' name = 'todo' [checked]='todo.completed' (change)='onToggleTodoComplete(todo)'>
-    <span *ngIf = '!aenderungen'>{{todo.title}}</span>
-    <input matInput placeholder = 'todo.title' *ngIf = 'aenderungen' [(ngModel)] = 'todo.title' name = 'todo' type = 'text' (keyup.enter)='onChangeTitle(todo)'>
-</mat-checkbox> 
-<button mat-icon-button color = 'warn' *ngIf = '!aenderungen' (click)='removeTodo(todo)' aria-label = 'löschen'>
+<!-- Input jetzt zu erkennen, änderungen im Titel werden aber nicht gespeichter-->
+
+<mat-checkbox class='margin' color='primary' name='todo' [checked]='todo.completed'(change)='onToggleTodoComplete(todo)'></mat-checkbox>
+<span *ngIf="!aenderungen" >{{todo.title}}</span>
+<span *ngIf="aenderungen">
+    <mat-form-field appearance="fill" class="todo-liste" >
+        <input matInput  name='todo' type='text' (keyup.enter)='onChangeTitle(todo.title)'  [(ngModel)]='todo.title' >
+    </mat-form-field>
+</span>
+<button mat-icon-button class='todo-button' color='warn' *ngIf='!aenderungen' (click)='removeTodo(todo)' aria-label='löschen'>
     <mat-icon>delete</mat-icon>
 </button>
-<button mat-icon-button color = 'primary' *ngIf = '!aenderungen' (click) = 'aenderungen = !aenderungen'>
+<button mat-icon-button class='todo-button' color='primary' *ngIf='!aenderungen' (click)='aenderungen = !aenderungen'>
     <mat-icon>create</mat-icon>
 </button>
-<button mat-icon-button color = 'primary' *ngIf = 'aenderungen' (click)='onAbbrechen(todo)'>
+<button mat-icon-button class='todo-button' color='primary' *ngIf='aenderungen' (click)='onAbbrechen(todo)'>
     <mat-icon>clear</mat-icon>
 </button>
-<button mat-icon-button color = 'primary' *ngIf = 'aenderungen' (click)='onChangeTitle(todo)'>
+<button mat-icon-button class='todo-button' color='primary' *ngIf='aenderungen' (click)='onChangeTitle(todo.title)'>
     <mat-icon>done</mat-icon>
-</button>
+</button> 
